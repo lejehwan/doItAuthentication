@@ -18,4 +18,8 @@ public class MemberService {
         memberRepository.save(member);
         return member.getId();
     }
+
+    public Member findMember(Long id){
+        return memberRepository.findMember(id);
+    }
 }
