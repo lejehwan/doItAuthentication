@@ -1,27 +1,35 @@
 package com.example.doItAuthentication.controller;
 
 import com.example.doItAuthentication.domain.Member;
+import com.example.doItAuthentication.service.MemberService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@Controller
 @Slf4j
+@Controller
+@RequiredArgsConstructor
 public class MemberController {
+
+    private final MemberService memberService;
 
     @GetMapping("members/new")
     public String createMemberFrom(Model model){
-        model.addAttribute("memberForm", new Member());
+        model.addAttribute("memberForm", new MemberForm());
         return "members/createMemberForm";
     }
 
     @PostMapping("members/new")
-    public String createMember(){
-        //TODO
-
+    public String createMember(@Valid MemberForm form){
+        Member member = Member.builder()
+                .name(form.getName())
+                .pw(form.getPw())
+                .build();
+        memberService.join(member);
         return "redirect:/";
     }
 
