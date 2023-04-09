@@ -23,7 +23,8 @@ class MemberServiceTest {
     @DisplayName("회원가입 테스트")
     public void join() {
         Member member = Member.builder()
-                .name("ljh")
+                .userName("ljh")
+                .password("1234")
                 .build();
 
         Long savedId = memberService.join(member);
