@@ -27,7 +27,7 @@ public class MemberController {
     public String createMember(@Valid MemberForm form){
         Member member = Member.builder()
                 .userName(form.getName())
-                .password(form.getPw())
+//                .password(form.getPw())
                 .build();
         memberService.join(member);
         return "redirect:/";
