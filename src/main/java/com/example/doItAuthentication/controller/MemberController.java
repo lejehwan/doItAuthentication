@@ -25,10 +25,7 @@ public class MemberController {
 
     @PostMapping("members/new")
     public String createMember(@Valid MemberForm form){
-        Member member = Member.builder()
-                .userName(form.getName())
-//                .password(form.getPw())
-                .build();
+        Member member = new Member(form.getName(), form.getPw());
         memberService.join(member);
         return "redirect:/";
     }
@@ -42,7 +39,7 @@ public class MemberController {
     @PostMapping("/login")
     public String login(LoginForm loginForm){
         log.info(loginForm.getName());
-        return "redirect:/";
+        return "redirect:/contents";
     }
 
 }
